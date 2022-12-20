@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Area of a shape</title>
+  </head>
+
+  <body>
+  <form action="javascript:calculateArea()" onchange="javascript:updateForm()">
+
+      <label for="id_shapes">Select a shape</label>
+    <select id="id_shapes">
+        <option value="rectangle"selected >Rectangle</option>
+        <option value="circle" >Circle</option>
+        <option value="triangle" >Triangle</option>
+        <option value="parallelogram" >Parallelogram</option>
+    </select>
+
+    <br><br>
+
+    <div id="id_inputs_rectangle">
+        <label for="id_length">Length</label>
+        <input id="id_length" type="number" min="0" step="0.1">
+        <label for="id_width">Width</label>
+        <input id="id_width" type="number" min="0" step="0.1">
+    </div>
+
+     <div id="id_inputs_circle" hidden>
+        <label for="id_radius">Radius</label>
+        <input id="id_radius" type="number" min="0" step="0.01"> 
+    </div>
+
+     <div id="id_inputs_triangle" hidden>
+       <label for= "id_base">Base</label>
+       <input id="id_base" type="number" min="0" step="0.01">
+       <label for="id_height">Height</label>
+       <input id="id_height" type="number" min="0" step="0.1">
+    </div>
+     <div id="id_inputs_parallelogram" hidden>
+       <label for="id_length">Length</label>
+       <input id="id_length" type="number" min="0" step="0.1">
+       <label for="id_width">Width</label>
+       <input id="id_width" type="number" min="0" step="0.1">
+    </div>
+    
+    <input type="submit" value="Calculate Area">
+    <p id="id_output"></p>
+  </form>
+  <input type ="button" onclick ="javascript:openHelp()" value="Help"/>
+  <script>
+    function updateForm() {
+        document.getElementById("id_inputs_rectangle").hidden = true;
+        document.getElementById("id_inputs_circle").hidden = true;
+        document.getElementById("id_inputs_triangle").hidden = true;
+        document.getElementById("id_inputs_parallelogram").hidden = true;
+
+
+        let shape = document.getElementById("id_shapes").value;
+        switch (shape) {
+            case "rectangle":
+                document.getElementById("id_inputs_rectangle").hidden = false;
+                break;
+            case "circle":
+                document.getElementById("id_inputs_circle").hidden = false;
+                break;
+            case "triangle":
+                document.getElementById("id_inputs_triangle").hidden = false;
+                break;
+            case "parallelogram":
+                document.getElementById("id_inputs_parallelogram").hidden = false;
+                break;
+          }
+
+      }
+
+    function calculateArea() {
+
+      let shape = document.getElementById("id_shapes").value;
+
+
+      let area = 0
+      switch (shape) {
+            case "circle":
+                let radius = document.getElementById("id_radius").value;
+                area = Math.PI * radius * radius;
+                break;
+            case "rectangle":
+                let length = document.getElementById("id_length").value;
+                let width = document.getElementById("id_width").value;
+                area = length * width;
+                break;
+            case "triangle":
+                let base = document.getElementById("id_base").value;
+                let height = document.getElementById("id_height").value;
+                area = base * height / 2;
+                break;
+            case "parallelogram":
+                let plength = document.getElementById("id_length").value;
+                let pwidth = document.getElementById("id_width").value;
+                area = plength * pwidth;
+                break;
+            }
+            
+            document.getElementById("id_output").innerHTML = "Area = " + area.toFixed(2);
+    }
+    function openHelp() {
+      
+      alert("Choose the shape to calculate the area of from the list, then input the measurements and click 'Calculate Area'");
+    }
+  </script>
+  </body>
+</html>
